@@ -108,8 +108,8 @@ void sha2(const unsigned char * const msg, const unsigned long len, unsigned cha
 		}
 		for (; i < 64; ++i)
 		{
-			unsigned int s0 = rrotate(w[i-15], 7) ^ rrotate(w[i-15], 18) ^ (w[i-15] >> 3);
-			unsigned int s1 = rrotate(w[i-2], 17) ^ rrotate(w[i-2], 19) ^ (w[i-2] >> 10);
+			unsigned int s0 = RROTATE(w[i-15], 7) ^ RROTATE(w[i-15], 18) ^ (w[i-15] >> 3);
+			unsigned int s1 = RROTATE(w[i-2], 17) ^ RROTATE(w[i-2], 19) ^ (w[i-2] >> 10);
 			w[i] = w[i-16] + s0 + w[i-7] + s1;
 		}
 
@@ -124,10 +124,10 @@ void sha2(const unsigned char * const msg, const unsigned long len, unsigned cha
 
 		for (i = 0; i < 64; ++i)
 		{
-			unsigned int s1 = rrotate(e, 6) ^ rrotate(e, 11) ^ rrotate(e, 25);
+			unsigned int s1 = RROTATE(e, 6) ^ RROTATE(e, 11) ^ RROTATE(e, 25);
 			unsigned int ch = (e & f) ^ ((~e) & g);
 			unsigned int temp1 = h + s1 + ch + k[i] + w[i];
-			unsigned int s0 = rrotate(a, 2) ^ rrotate(a, 13) ^ rrotate(a, 22);
+			unsigned int s0 = RROTATE(a, 2) ^ RROTATE(a, 13) ^ RROTATE(a, 22);
 			unsigned int maj = (a & b) ^ (a & c) ^ (b & c);
 			unsigned int temp2 = s0 + maj;
 			h = g;

@@ -3,6 +3,10 @@
 
 #define INT_SIZE_BITS 8*sizeof(int)
 
-int rrotate(unsigned int x, int n);
-int lrotate(unsigned int x, int n);
+/* in these macros, x is unsigned int, n >= 0 (and ideally n < INT_SIZE_BITS) */
+#define RROTATE(x, n) ((x << (INT_SIZE_BITS - n)) | (x >> n))
+#define LROTATE(x, n) ((x >> (INT_SIZE_BITS - n)) | (x << n))
+
+int rrotate(unsigned int x, unsigned int n);
+int lrotate(unsigned int x, unsigned int n);
 #endif

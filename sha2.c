@@ -36,7 +36,7 @@ static inline void ltoc(unsigned long l, char * const c)
 	c[7] = (char) l;
 }
 
-void sha2(const unsigned char * const msg, const unsigned long len, unsigned char * const hash, hash_alg h)
+void sha2(const unsigned char * const msg, const unsigned long len, unsigned char * const dest, hash_alg h)
 {
 	unsigned int h0;
 	unsigned int h1;
@@ -93,7 +93,8 @@ void sha2(const unsigned char * const msg, const unsigned long len, unsigned cha
 		{
 			char* tail_tmp = tail;
 			char* const l_ptr = tail + TAIL_SIZE - 8;
-			while(*temp)
+			unsigned int count = 0;
+			while(count++ < excess)
 				*tail_tmp++ = *temp++;
 			*tail_tmp++ = 0x80;
 			while (tail_tmp < l_ptr)
@@ -148,13 +149,13 @@ void sha2(const unsigned char * const msg, const unsigned long len, unsigned cha
 		h6 += g;
 		h7 += h;
 	}
-	itoc(h0, hash);
-	itoc(h1, hash + 4);
-	itoc(h2, hash + 8);
-	itoc(h3, hash + 12);
-	itoc(h4, hash + 16);
-	itoc(h5, hash + 20);
-	itoc(h6, hash + 24);
+	itoc(h0, dest);
+	itoc(h1, dest + 4);
+	itoc(h2, dest + 8);
+	itoc(h3, dest + 12);
+	itoc(h4, dest + 16);
+	itoc(h5, dest + 20);
+	itoc(h6, dest + 24);
 	if (h == SHA256)
-		itoc(h7, hash + 28);
+		itoc(h7, dest + 28);
 }

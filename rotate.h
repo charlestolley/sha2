@@ -7,6 +7,4 @@
 #define RROTATE(x, n) ((x << (INT_SIZE_BITS - n)) | (x >> n))
 #define LROTATE(x, n) ((x >> (INT_SIZE_BITS - n)) | (x << n))
 
-int rrotate(unsigned int x, unsigned int n);
-int lrotate(unsigned int x, unsigned int n);
 #endif

@@ -1,4 +1,3 @@
-#include <stdint.h>
 #include "sha2.h"
 
 #define INT_SIZE_BITS (8*sizeof(uint32_t))
